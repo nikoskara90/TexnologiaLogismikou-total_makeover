@@ -1,0 +1,903 @@
+{
+	"info": {
+		"_postman_id": "0fd27994-0cf3-4347-80b8-5f2cd2ddc0b1",
+		"name": "Texnologia Logismikou",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37920654"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get all Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{$randomUserName}}\",\r\n    \"password\": \"{{$randomPassword}}\",\r\n    \"fullName\": \"{{$randomFullName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "Get all Roles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/roles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Role to User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Define the possible roles\r",
+									"const roles = [\"VISITOR\", \"AUTHOR\", \"PC_MEMBER\", \"PC_CHAIR\"];\r",
+									"\r",
+									"// Select a random role from the list\r",
+									"const randomRole = roles[Math.floor(Math.random() * roles.length)];\r",
+									"\r",
+									"// Log the random role to verify it's changing\r",
+									"console.log(\"Random Role: \", randomRole);\r",
+									"\r",
+									"// Set the role in the environment or collection variable\r",
+									"pm.environment.set(\"randomRoleName\", randomRole);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"roleName\": \"{{randomRoleName}}\",\r\n  \"user\": {\r\n    \"userId\": 9\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/roles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Conference",
+			"item": [
+				{
+					"name": "Get all Conferences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/28",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Conference",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomCity}}\",\r\n    \"description\": \"{{$randomCatchPhrase}}\",\r\n    \"pcChair\": [\r\n        {\r\n            \"userId\": 1\r\n        }\r\n    ],\r\n    \"pcMembers\": [\r\n        {\r\n            \"userId\": 4\r\n        }\r\n    ],\r\n    \"papers\": [\r\n        {\r\n            \"paperId\": 4\r\n        },\r\n        {\r\n            \"paperId\": 5\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/conferences",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Conference",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomCity}}\",\r\n    \"description\": \"{{$randomCatchPhrase}}\",\r\n    \"pcChair\": [\r\n            {\r\n                \"userId\": 4\r\n            }\r\n        ],\r\n        \"pcMembers\": [\r\n            {\r\n                \"userId\": 1\r\n            }\r\n        ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/conferences/28",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add PC chair",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    { \"userId\": 1 },\r\n    { \"userId\": 2 }\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/conferences/35/add-pc-chairs",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"35",
+								"add-pc-chairs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add PC member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    { \"userId\": 4 },\r\n    { \"userId\": 2 }\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/conferences/35/add-pc-members",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"35",
+								"add-pc-members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Conference",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"Visionary\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/conferences/search/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"search",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Conference",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/35/view",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"35",
+								"view"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Conference",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/25",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATED-SUBMISSION",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/28/start-submission",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"28",
+								"start-submission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SUBMISSION-ASSIGNMENT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/26/start-reviewer-assignment",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"26",
+								"start-reviewer-assignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ASSIGNMENT-REVIEW",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/26/start-review",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"26",
+								"start-review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REVIEW-DECISION",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/26/start-decision-making",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"26",
+								"start-decision-making"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DECISION-FINAL_SUBMISSION",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/27/start-final-submission",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"27",
+								"start-final-submission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FINAL_SUBMISSION-FINAL",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/conferences/27/end-conference",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"conferences",
+								"27",
+								"end-conference"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Paper",
+			"item": [
+				{
+					"name": "Get all Papers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/papers/14",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Paper",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"{{$randomJobTitle}}\",\r\n    \"abstractText\": \"sample\",\r\n    \"content\": \"content\",\r\n    \"authorNames\": \"Nikos karagiannis\",\r\n    \"user\": {\r\n        \"userId\": \"1\"\r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/papers/26",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update paper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"{{$randomBankAccountName}}\",\r\n    \"abstractText\": \"Updated abstract content\",\r\n    \"authorNames\": \"Swtiris Flaskis\",\r\n    \"content\": \"Updated content of the paper\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/papers/6",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add coAuthor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    { \"userId\": 1 },\r\n    { \"userId\": 2 }\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/papers/2/add-coauthors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"2",
+								"add-coauthors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Paper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/papers/2/submit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"2",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Reviwer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reviewer1\": {\r\n        \"userId\":1\r\n    },\r\n    \"reviewer2\": {\r\n        \"userId\":4\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/papers/14/assign-reviewers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"14",
+								"assign-reviewers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Review Paper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reviewer1Score\" : 6,\r\n    \"reviewer1Comments\": \"{{$randomLoremSentence}}\",\r\n    \"reviewer2Score\" : 7,\r\n    \"reviewer2Comments\": \"{{$randomLoremSentence}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/papers/14/submit-review",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"14",
+								"submit-review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Paper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/papers/10/approve",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"10",
+								"approve"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject Paper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/papers/11/reject",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"11",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Final submit Paper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"content\": \"modified content\",\r\n    \"reviewer1Comments\": \"{{$randomLoremSentence}}\",\r\n    \"reviewer2Comments\": \"{{$randomLoremSentence}}\"\r\n}\r\n\r\n//if entry is null, it doesnt change in the database table",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/papers/14/final-submit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"14",
+								"final-submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept Paper",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/papers/10/accept",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"10",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Paper",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/papers/search",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Paper",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/papers/10/view",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"10",
+								"view"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Paper",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/papers/{id}/withdraw",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"papers",
+								"{id}",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LOGIN",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"kara\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080"
+		}
+	]
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+  </head>
+  <body>
+    <h2>Login</h2>
+    <form id="loginForm" action="/login" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+      <br />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <br />
+      <button type="submit">Login</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var form = document.getElementById("loginForm");
+          var formData = new FormData(form);
+
+          var username = formData.get("username");
+          var password = formData.get("password");
+
+          console.log("Form Data:");
+          console.log("Username:", username);
+          console.log("Password:", password);
+
+          fetch(`/login/${username}/${password}`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+            },
+          })
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("result").innerText = data;
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+  </body>
+</html>
